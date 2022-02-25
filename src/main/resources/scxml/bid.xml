@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" initial="edit" version="1.0">
+    <state id="edit">
+        <transition event="submit" target="review"/>
+        <transition target="edit"/>
+    </state>
+    <state id="review">
+        <transition event="approve" target="addon"/>
+        <transition event="disapprove" target="edit"/>
+    </state>
+    <state id="addon">
+        <transition event="submit" target="final"/>
+        <transition target="addon"/>
+    </state>
+    <final id="final"/>
+</scxml>
