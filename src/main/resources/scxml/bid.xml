@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<scxml xmlns="http://www.w3.org/2005/07/scxml" initial="edit" version="1.0">
-    <state id="edit">
-        <transition event="submit" target="review"/>
-        <transition target="edit"/>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" initial="created" version="1.0">
+    <state id="created">
+        <transition event="process" target="editing"/>
     </state>
-    <state id="review">
-        <transition event="approve" target="addon"/>
-        <transition event="disapprove" target="edit"/>
+    <state id="editing">
+        <transition event="submit" target="reviewing"/>
+        <transition event="edit" target="editing"/>
     </state>
-    <state id="addon">
-        <transition event="submit" target="final"/>
-        <transition target="addon"/>
+    <state id="reviewing">
+        <transition event="approve" target="tracking"/>
+        <transition event="disapprove" target="editing"/>
     </state>
-    <final id="final"/>
+    <state id="tracking">
+        <transition event="finalize" target="closed"/>
+        <transition event="track" target="tracking"/>
+    </state>
+    <final id="closed"/>
 </scxml>

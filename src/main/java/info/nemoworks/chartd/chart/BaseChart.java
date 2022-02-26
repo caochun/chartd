@@ -1,16 +1,38 @@
 package info.nemoworks.chartd.chart;
 
+import com.google.common.eventbus.EventBus;
 import org.apache.commons.scxml2.env.AbstractStateMachine;
 import org.apache.commons.scxml2.model.ModelException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 
-public class BaseChart extends AbstractStateMachine {
+public abstract class BaseChart extends AbstractStateMachine {
+
+    private EventBus eventBus;
+
+    private EventBus getEventBus() {
+        return eventBus;
+    }
+
+    @Autowired
+    public void setEventBus(EventBus eventBus) {
+        this.eventBus = eventBus;
+    }
 
     public BaseChart(URL scxmlDocument) throws ModelException {
         super(scxmlDocument);
+    }
+
+    @PostConstruct
+    public void bindEventSources(){
+
+
+
     }
 
     /**

@@ -9,6 +9,7 @@ public class BidContentUpdateEvent extends Event {
     private BidContent bidContent;
 
     public BidContentUpdateEvent(BidContent bidContent) {
+        super("BidContentUpdateEvent");
         this.bidContent = bidContent;
     }
 }
