@@ -1,10 +1,15 @@
 package info.nemoworks.chartd.chart;
 
 import com.google.common.eventbus.EventBus;
+import info.nemoworks.chartd.handle.EventHandle;
+import org.apache.commons.scxml2.SCXMLListener;
 import org.apache.commons.scxml2.env.AbstractStateMachine;
+import org.apache.commons.scxml2.model.EnterableState;
 import org.apache.commons.scxml2.model.ModelException;
+import org.apache.commons.scxml2.model.Transition;
+import org.apache.commons.scxml2.model.TransitionTarget;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.ApplicationContext;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.InvocationTargetException;
@@ -15,8 +20,11 @@ public abstract class BaseChart extends AbstractStateMachine {
 
     private EventBus eventBus;
 
-    private EventBus getEventBus() {
-        return eventBus;
+    private ApplicationContext applicationContext;
+
+    @Autowired
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
     }
 
     @Autowired
@@ -29,10 +37,26 @@ public abstract class BaseChart extends AbstractStateMachine {
     }
 
     @PostConstruct
-    public void bindEventSources(){
+    public void initBus() {
 
+        applicationContext.getBeansOfType(EventHandle.class).values().stream().forEach(eventHandle -> eventBus.register(eventHandle));
 
+        this.getEngine().addListener(this.getEngine().getStateMachine(), new SCXMLListener() {
+            @Override
+            public void onEntry(EnterableState enterableState) {
+                BaseChart.this.eventBus.post(enterableState.getId());
+            }
 
+            @Override
+            public void onExit(EnterableState enterableState) {
+
+            }
+
+            @Override
+            public void onTransition(TransitionTarget transitionTarget, TransitionTarget transitionTarget1, Transition transition, String s) {
+
+            }
+        });
     }
 
     /**

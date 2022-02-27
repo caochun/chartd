@@ -4,7 +4,9 @@ import info.nemoworks.chartd.entity.Bid;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.scxml2.model.ModelException;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BidChart extends BaseChart {
 
     private static final String SCXML_MODEL = "scxml/bid.xml";
@@ -21,4 +23,6 @@ public class BidChart extends BaseChart {
     public BidChart() throws ModelException {
         this(new Bid());
     }
+
+
 }
