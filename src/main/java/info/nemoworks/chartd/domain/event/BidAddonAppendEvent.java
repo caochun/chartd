@@ -1,6 +1,6 @@
-package info.nemoworks.chartd.event;
+package info.nemoworks.chartd.domain.event;
 
-import info.nemoworks.chartd.entity.BidAddon;
+import info.nemoworks.chartd.domain.model.BidAddon;
 
 public class BidAddonAppendEvent extends Event {
 

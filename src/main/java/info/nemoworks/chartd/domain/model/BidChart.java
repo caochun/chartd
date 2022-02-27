@@ -1,6 +1,6 @@
-package info.nemoworks.chartd.chart;
+package info.nemoworks.chartd.domain.model;
 
-import info.nemoworks.chartd.entity.Bid;
+import info.nemoworks.chartd.chart.BaseChart;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.scxml2.model.ModelException;

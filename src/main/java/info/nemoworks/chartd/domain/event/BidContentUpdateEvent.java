@@ -1,6 +1,6 @@
-package info.nemoworks.chartd.event;
+package info.nemoworks.chartd.domain.event;
 
-import info.nemoworks.chartd.entity.BidContent;
+import info.nemoworks.chartd.domain.model.BidContent;
 import lombok.Getter;
 
 public class BidContentUpdateEvent extends Event {

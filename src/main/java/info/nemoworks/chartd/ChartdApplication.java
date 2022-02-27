@@ -1,6 +1,6 @@
 package info.nemoworks.chartd;
 
-import info.nemoworks.chartd.chart.BidChart;
+import info.nemoworks.chartd.domain.model.BidChart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

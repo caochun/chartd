@@ -1,36 +1,30 @@
 package info.nemoworks.chartd.chart;
 
-import com.google.common.eventbus.EventBus;
-import info.nemoworks.chartd.handle.EventHandle;
+import info.nemoworks.chartd.chart.event.ChartStateEvent;
+import info.nemoworks.chartd.chart.event.ChartTransitionEvent;
+import info.nemoworks.chartd.chart.event.EventDispatcher;
+import info.nemoworks.chartd.chart.event.EventHandler;
 import org.apache.commons.scxml2.SCXMLListener;
 import org.apache.commons.scxml2.env.AbstractStateMachine;
 import org.apache.commons.scxml2.model.EnterableState;
 import org.apache.commons.scxml2.model.ModelException;
 import org.apache.commons.scxml2.model.Transition;
 import org.apache.commons.scxml2.model.TransitionTarget;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 
-public abstract class BaseChart extends AbstractStateMachine {
+public abstract class BaseChart extends AbstractStateMachine implements EventHandler<ChartTransitionEvent> {
 
-    private EventBus eventBus;
+    private Logger logger = LoggerFactory.getLogger(BaseChart.class);
 
-    private ApplicationContext applicationContext;
 
-    @Autowired
-    public void setApplicationContext(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
+    private EventDispatcher eventDispatcher;
 
-    @Autowired
-    public void setEventBus(EventBus eventBus) {
-        this.eventBus = eventBus;
-    }
 
     public BaseChart(URL scxmlDocument) throws ModelException {
         super(scxmlDocument);
@@ -39,12 +33,10 @@ public abstract class BaseChart extends AbstractStateMachine {
     @PostConstruct
     public void initBus() {
 
-        applicationContext.getBeansOfType(EventHandle.class).values().stream().forEach(eventHandle -> eventBus.register(eventHandle));
-
         this.getEngine().addListener(this.getEngine().getStateMachine(), new SCXMLListener() {
             @Override
             public void onEntry(EnterableState enterableState) {
-                BaseChart.this.eventBus.post(enterableState.getId());
+                BaseChart.this.eventDispatcher.dispatch(new ChartStateEvent(enterableState));
             }
 
             @Override
@@ -54,9 +46,16 @@ public abstract class BaseChart extends AbstractStateMachine {
 
             @Override
             public void onTransition(TransitionTarget transitionTarget, TransitionTarget transitionTarget1, Transition transition, String s) {
+                BaseChart.this.eventDispatcher.dispatch(new ChartTransitionEvent(transition));
 
             }
         });
+    }
+
+    @Override
+    public void handle(ChartTransitionEvent event) {
+        logger.info("Triggering transition: " + event.getEvent());
+        this.fireEvent(event.getEvent());
     }
 
     /**

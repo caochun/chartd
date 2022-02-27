@@ -1,12 +1,16 @@
-package info.nemoworks.chartd.entity;
+package info.nemoworks.chartd.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Data
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class BidContent {
 
+    @NonNull
     private String content;
     private String author;
 
