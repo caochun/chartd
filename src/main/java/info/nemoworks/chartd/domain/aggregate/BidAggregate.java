@@ -7,9 +7,9 @@ import info.nemoworks.chartd.domain.model.BidAddon;
 import info.nemoworks.chartd.domain.model.BidContent;
 import info.nemoworks.chartd.domain.repository.BidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class BidAggregate {
 
     private BidRepository bidRepository;
