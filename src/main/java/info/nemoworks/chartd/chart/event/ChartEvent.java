@@ -1,21 +1,24 @@
 package info.nemoworks.chartd.chart.event;
 
-import lombok.Getter;
+import info.nemoworks.chartd.chart.BaseChart;
+import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import java.time.Instant;
 import java.util.UUID;
 
+@Data
+@RequiredArgsConstructor
 public class ChartEvent {
-    @Getter
-    private UUID id;
-    @Getter
-    private Instant timestamp;
-    @Getter
-    private String event;
 
-    public ChartEvent(String event) {
-        this.id = UUID.randomUUID();
-        this.timestamp = Instant.now();
-        this.event = event;
-    }
+    private final UUID id = UUID.randomUUID();
+    private final Instant timestamp = Instant.now();
+
+    @NonNull
+    private String event;
+    @NonNull
+    private BaseChart chart;
+
+
 }

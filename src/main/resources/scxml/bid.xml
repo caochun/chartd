@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <scxml xmlns="http://www.w3.org/2005/07/scxml" initial="created" version="1.0">
-    <state id="init">
-        <transition event="create" target="created"/>
-    </state>
     <state id="created">
         <transition event="process" target="editing"/>
     </state>
     <state id="editing">
         <transition event="submit" target="reviewing"/>
-        <transition event="edit" target="editing"/>
+        <transition event="save" target="editing"/>
     </state>
     <state id="reviewing">
         <transition event="approve" target="tracking"/>
