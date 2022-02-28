@@ -19,7 +19,7 @@ public class BidAggregate {
         this.bidRepository = bidRepository;
     }
 
-    public Bid handleCreateCommand(CreateBidCommand command) {
+    public Bid handleCreateCommand(CreateCommand command) {
         Bid bid = new Bid();
         bid.setTitle(command.getTitle());
         bid.setCreator(command.getCreator());
@@ -27,7 +27,7 @@ public class BidAggregate {
         return bid;
     }
 
-    public Bid handleApproveCommand(ApproveBidCommand command) {
+    public Bid handleApproveCommand(ApproveCommand command) {
         Bid bid = bidRepository.getBid(command.getBidId());
         bid.setApproved(true);
         bidRepository.saveBid(bid);
@@ -35,21 +35,21 @@ public class BidAggregate {
     }
 
 
-    public Bid handleCloseCommand(CloseBidCommand command) {
+    public Bid handleCloseCommand(CloseCommand command) {
         Bid bid = bidRepository.getBid(command.getBidId());
         bid.setClosed(true);
         bidRepository.saveBid(bid);
         return bid;
     }
 
-    public Bid handleEditContentCommand(EditBidContentCommand command) {
+    public Bid handleEditContentCommand(EditContentCommand command) {
         Bid bid = bidRepository.getBid(command.getBidId());
         bid.setContent(new Content(command.getContent(), command.getAuthor()));
         bidRepository.saveBid(bid);
         return bid;
     }
 
-    public Bid handleAppendAddonCommand(AppendBidAddonCommand command) {
+    public Bid handleAppendAddonCommand(AppendAddonCommand command) {
         Bid bid = bidRepository.getBid(command.getBidId());
         bid.getAddons().add(new Addon(command.getBidId(), command.getMessage(), command.getAuthor()));
         bidRepository.saveBid(bid);

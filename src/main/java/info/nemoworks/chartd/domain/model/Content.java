@@ -12,6 +12,6 @@ public class Content {
 
     @NonNull
     private String content;
-    private String author;
+    private String editor;
 
 }

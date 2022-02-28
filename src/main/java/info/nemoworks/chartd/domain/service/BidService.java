@@ -5,7 +5,7 @@ import info.nemoworks.chartd.chart.event.StateEntryHandler;
 import info.nemoworks.chartd.chart.event.StateEvent;
 import info.nemoworks.chartd.chart.event.ChartStateHandler;
 import info.nemoworks.chartd.domain.aggregate.BidAggregate;
-import info.nemoworks.chartd.domain.command.CreateBidCommand;
+import info.nemoworks.chartd.domain.command.CreateCommand;
 import info.nemoworks.chartd.domain.model.Bid;
 import info.nemoworks.chartd.domain.model.BidChart;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class BidService  {
     }
 
     public Bid createBid(String title, String author){
-        return bidAggregate.handleCreateCommand(new CreateBidCommand(title, author));
+        return bidAggregate.handleCreateCommand(new CreateCommand(title, author));
     }
 
     public void enqueueEditingList(Bid bid){
