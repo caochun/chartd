@@ -8,7 +8,7 @@ import java.time.Instant;
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class BidAddon {
+public class Addon {
 
     private final Instant timestamp = Instant.now();
 

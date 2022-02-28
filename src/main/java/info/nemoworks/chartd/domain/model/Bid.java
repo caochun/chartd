@@ -14,9 +14,9 @@ public class Bid extends Entity {
 
     private String title;
 
-    private BidContent content;
+    private Content content;
 
-    private List<BidAddon> addons = new ArrayList<>();
+    private List<Addon> addons = new ArrayList<>();
 
     private boolean approved;
 

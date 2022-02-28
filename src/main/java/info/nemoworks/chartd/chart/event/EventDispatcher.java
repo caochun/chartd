@@ -31,7 +31,7 @@ public class EventDispatcher {
         applicationContext.getBeansOfType(EventHandler.class).values().stream().forEach(eventHandler -> eventBus.register(eventHandler));
     }
 
-    public void dispatch(ChartEvent event) {
+    public void dispatch(Event event) {
         this.eventBus.post(event);
     }
 

@@ -3,8 +3,8 @@ package info.nemoworks.chartd.domain.aggregate;
 
 import info.nemoworks.chartd.domain.command.*;
 import info.nemoworks.chartd.domain.model.Bid;
-import info.nemoworks.chartd.domain.model.BidAddon;
-import info.nemoworks.chartd.domain.model.BidContent;
+import info.nemoworks.chartd.domain.model.Addon;
+import info.nemoworks.chartd.domain.model.Content;
 import info.nemoworks.chartd.domain.repository.BidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -44,14 +44,14 @@ public class BidAggregate {
 
     public Bid handleEditContentCommand(EditBidContentCommand command) {
         Bid bid = bidRepository.getBid(command.getBidId());
-        bid.setContent(new BidContent(command.getContent(), command.getAuthor()));
+        bid.setContent(new Content(command.getContent(), command.getAuthor()));
         bidRepository.saveBid(bid);
         return bid;
     }
 
     public Bid handleAppendAddonCommand(AppendBidAddonCommand command) {
         Bid bid = bidRepository.getBid(command.getBidId());
-        bid.getAddons().add(new BidAddon(command.getBidId(), command.getMessage(), command.getAuthor()));
+        bid.getAddons().add(new Addon(command.getBidId(), command.getMessage(), command.getAuthor()));
         bidRepository.saveBid(bid);
         return bid;
     }

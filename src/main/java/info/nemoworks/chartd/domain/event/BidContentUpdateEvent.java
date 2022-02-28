@@ -1,15 +1,15 @@
 package info.nemoworks.chartd.domain.event;
 
-import info.nemoworks.chartd.domain.model.BidContent;
+import info.nemoworks.chartd.domain.model.Content;
 import lombok.Getter;
 
 public class BidContentUpdateEvent extends Event {
 
     @Getter
-    private BidContent bidContent;
+    private Content content;
 
-    public BidContentUpdateEvent(BidContent bidContent) {
+    public BidContentUpdateEvent(Content content) {
         super("BidContentUpdateEvent");
-        this.bidContent = bidContent;
+        this.content = content;
     }
 }

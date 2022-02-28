@@ -1,17 +1,15 @@
 package info.nemoworks.chartd.domain.service;
 
-import info.nemoworks.chartd.chart.event.ChartStateEvent;
-import info.nemoworks.chartd.chart.event.ChartTransitionEvent;
+import info.nemoworks.chartd.chart.event.StateEvent;
 import info.nemoworks.chartd.chart.event.EventDispatcher;
+import info.nemoworks.chartd.domain.model.Bid;
 import info.nemoworks.chartd.domain.model.BidChart;
 import info.nemoworks.chartd.domain.repository.BidChartRepository;
-import org.apache.commons.scxml2.SCXMLListener;
-import org.apache.commons.scxml2.model.EnterableState;
 import org.apache.commons.scxml2.model.ModelException;
-import org.apache.commons.scxml2.model.Transition;
-import org.apache.commons.scxml2.model.TransitionTarget;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BidChartService {
 
     private BidChartRepository bidChartRepository;
@@ -28,32 +26,18 @@ public class BidChartService {
         this.eventDispatcher = eventDispatcher;
     }
 
-    public BidChart createBidChart() {
+    public BidChart createBidChart(Bid bid) {
+        BidChart bidChart;
+
         try {
-            BidChart bidChart = new BidChart();
-            bidChart.getEngine().addListener(bidChart.getEngine().getStateMachine(), new SCXMLListener() {
-                @Override
-                public void onEntry(EnterableState enterableState) {
-                    eventDispatcher.dispatch(new ChartStateEvent(enterableState, bidChart));
-                }
-
-                @Override
-                public void onExit(EnterableState enterableState) {
-
-                }
-
-                @Override
-                public void onTransition(TransitionTarget transitionTarget, TransitionTarget transitionTarget1, Transition transition, String s) {
-                    eventDispatcher.dispatch(new ChartTransitionEvent(transition, bidChart));
-                }
+            bidChart = new BidChart(bid, (s) -> {
+                this.eventDispatcher.dispatch(new StateEvent(s, bid));
             });
-
-            bidChartRepository.save(bidChart);
-            return bidChart;
         } catch (ModelException e) {
             return null;
         }
+
+        this.bidChartRepository.save(bidChart);
+        return bidChart;
     }
-
-
 }

@@ -1,13 +1,13 @@
 package info.nemoworks.chartd.domain.event;
 
-import info.nemoworks.chartd.domain.model.BidAddon;
+import info.nemoworks.chartd.domain.model.Addon;
 
 public class BidAddonAppendEvent extends Event {
 
-    private BidAddon bidAddon;
+    private Addon addon;
 
-    public BidAddonAppendEvent(BidAddon bidAddon) {
+    public BidAddonAppendEvent(Addon addon) {
         super("BidAddonAppendEvent");
-        this.bidAddon = bidAddon;
+        this.addon = addon;
     }
 }

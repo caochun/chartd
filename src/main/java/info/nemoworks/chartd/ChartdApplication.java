@@ -5,19 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
-public class ChartdApplication implements CommandLineRunner {
+@SpringBootApplication(scanBasePackages = {"info.nemoworks.chartd"})
+public class ChartdApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ChartdApplication.class, args);
 	}
 
-	@Autowired
-	private BidChart bidChart;
-
-	@Override
-	public void run(String... args) throws Exception {
-		bidChart.fireEvent("process");
-	}
 }

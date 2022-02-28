@@ -1,27 +1,22 @@
 package info.nemoworks.chartd.domain.model;
 
-import info.nemoworks.chartd.chart.BaseChart;
+import info.nemoworks.chartd.chart.AbstractChart;
 import lombok.Getter;
-import lombok.Setter;
+import org.apache.commons.scxml2.model.EnterableState;
 import org.apache.commons.scxml2.model.ModelException;
-import org.springframework.stereotype.Component;
 
-@Component
-public class BidChart extends BaseChart {
+import java.util.function.Consumer;
 
-    private static final String SCXML_MODEL = "scxml/bid.xml";
+public class BidChart extends AbstractChart {
+
+    private static final String SCXML_MODEL = "scxml/bidchart.xml";
 
     @Getter
-    @Setter
     private Bid bid;
 
-    public BidChart(Bid bid) throws ModelException {
-        super(Bid.class.getClassLoader().getResource(SCXML_MODEL));
+    public BidChart(Bid bid, Consumer<EnterableState> delegate) throws ModelException {
+        super(Bid.class.getClassLoader().getResource(SCXML_MODEL), delegate);
         this.bid = bid;
-    }
-
-    public BidChart() throws ModelException {
-        this(new Bid());
     }
 
 
