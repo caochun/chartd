@@ -1,11 +1,12 @@
 package info.nemoworks.chartd.domain.service;
 
 import com.google.common.eventbus.EventBus;
+import info.nemoworks.chartd.bid.service.BidChartService;
 import info.nemoworks.chartd.chart.event.StateEvent;
 import info.nemoworks.chartd.chart.event.ChartStateHandler;
 import info.nemoworks.chartd.chart.event.EventDispatcher;
-import info.nemoworks.chartd.domain.model.Bid;
-import info.nemoworks.chartd.domain.repository.BidChartRepository;
+import info.nemoworks.chartd.bid.domain.Bid;
+import info.nemoworks.chartd.bid.repository.BidChartRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
