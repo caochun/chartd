@@ -4,15 +4,9 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import java.time.Instant;
-import java.util.UUID;
-
 @Data
 @RequiredArgsConstructor
-public class Task<T extends Entity> {
-
-    private final UUID id = UUID.randomUUID();
-    private final Instant timestamp = Instant.now();
+public class Task<T extends Entity> extends Message {
 
     @NonNull
     private T target;
