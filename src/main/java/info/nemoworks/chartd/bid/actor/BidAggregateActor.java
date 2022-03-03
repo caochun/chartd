@@ -1,6 +1,6 @@
 package info.nemoworks.chartd.bid.actor;
 
-import info.nemoworks.chartd.bid.chart.BidChart;
+import info.nemoworks.chartd.bid.domain.BidChart;
 import info.nemoworks.chartd.bid.domain.Addon;
 import info.nemoworks.chartd.bid.domain.Bid;
 import info.nemoworks.chartd.bid.domain.Content;
@@ -14,6 +14,8 @@ import org.apache.commons.scxml2.model.ModelException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+
 @Component
 public class BidAggregateActor extends Actor implements BidAggregate {
 
@@ -26,6 +28,11 @@ public class BidAggregateActor extends Actor implements BidAggregate {
     }
 
     public BidAggregateActor() {
+
+    }
+
+    @PostConstruct
+    public void register(){
         this.getStub().register(new Subscriber<CreateCommand>(this::handleCreateCommand));
         this.getStub().register(new Subscriber<ApproveCommand>(this::handleApproveCommand));
         this.getStub().register(new Subscriber<CloseCommand>(this::handleCloseCommand));

@@ -1,4 +1,4 @@
-package info.nemoworks.chartd.bid.chart;
+package info.nemoworks.chartd.bid.domain;
 
 import info.nemoworks.chartd.bid.domain.Bid;
 import info.nemoworks.chartd.framework.AbstractChart;
