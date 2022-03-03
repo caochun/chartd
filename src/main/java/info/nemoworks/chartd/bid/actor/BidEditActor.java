@@ -1,14 +1,24 @@
 package info.nemoworks.chartd.bid.actor;
 
-import info.nemoworks.chartd.framework.Command;
-import info.nemoworks.chartd.bid.command.EditContentCommand;
-import info.nemoworks.chartd.framework.TaskActor;
-import info.nemoworks.chartd.bid.task.BidTask;
-import org.javatuples.Pair;
+import info.nemoworks.chartd.bid.message.BidTask;
+import info.nemoworks.chartd.framework.Actor;
+import info.nemoworks.chartd.framework.Subscriber;
+import org.springframework.stereotype.Component;
 
-public class BidEditActor extends TaskActor<BidTask, Pair<String, String>> {
-    @Override
-    public Command process(BidTask task, Pair<String, String> context) {
-        return new EditContentCommand(task.getTarget(), context.getValue0(), context.getValue1());
+import java.util.HashMap;
+import java.util.Map;
+
+@Component
+public class BidEditActor extends Actor {
+
+    private Map<String, BidTask.Editing> tasks = new HashMap<>();
+
+    public BidEditActor() {
+        this.getStub().register(new Subscriber<BidTask.Editing>(this::handleEditing));
     }
+
+    public void handleEditing(BidTask.Editing task) {
+        this.tasks.put(task.getSubject().getId(), task);
+    }
+
 }

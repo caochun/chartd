@@ -1,16 +1,19 @@
 package info.nemoworks.chartd.framework;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
-@Data
-@RequiredArgsConstructor
 public class Task<T extends Entity> extends Message {
 
     @NonNull
-    private T target;
-
-    @NonNull
     private String task;
+
+    @Getter
+    private T subject;
+
+    public Task(@NonNull T subject, @NonNull String task) {
+        super();
+        this.subject = subject;
+        this.task = task;
+    }
 }

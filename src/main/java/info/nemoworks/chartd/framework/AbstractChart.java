@@ -15,21 +15,23 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
-public abstract class AbstractChart {
+public abstract class AbstractChart<T extends Entity> {
     private SCXML stateMachine;
     private SCXMLExecutor engine;
     private Log log;
     private static final Class<?>[] SIGNATURE = new Class[0];
     private static final Object[] PARAMETERS = new Object[0];
 
+    private T entity;
 
-    public AbstractChart(URL scxmlDocument, Consumer<EnterableState> stateConsumer) throws ModelException {
-        this((URL) scxmlDocument, new JexlContext(), new JexlEvaluator(), stateConsumer);
+
+    public AbstractChart(URL scxmlDocument, BiConsumer<EnterableState, Entity> stateConsumer, T entity) throws ModelException {
+        this((URL) scxmlDocument, new JexlContext(), new JexlEvaluator(), stateConsumer, entity);
     }
 
-    public AbstractChart(URL scxmlDocument, Context rootCtx, Evaluator evaluator, Consumer<EnterableState> stateConsumer) throws ModelException {
+    public AbstractChart(URL scxmlDocument, Context rootCtx, Evaluator evaluator, BiConsumer<EnterableState, Entity> stateConsumer, T entity) throws ModelException {
         this.log = LogFactory.getLog(this.getClass());
 
         try {
@@ -42,15 +44,16 @@ public abstract class AbstractChart {
             this.logError(var7);
         }
 
-        this.initialize(this.stateMachine, rootCtx, evaluator, stateConsumer);
+        this.initialize(this.stateMachine, rootCtx, evaluator, stateConsumer, entity);
     }
 
 
-    private void initialize(SCXML stateMachine, Context rootCtx, Evaluator evaluator, Consumer<EnterableState> stateConsumer) throws ModelException {
+    private void initialize(SCXML stateMachine, Context rootCtx, Evaluator evaluator, BiConsumer<EnterableState, Entity> stateConsumer, T entity) throws ModelException {
         this.engine = new SCXMLExecutor(evaluator, new SimpleDispatcher(), new SimpleErrorReporter());
         this.engine.setStateMachine(stateMachine);
         this.engine.setRootContext(rootCtx);
         this.engine.addListener(stateMachine, new AbstractChart.EntryListener(stateConsumer));
+        this.entity = entity;
 
         try {
             this.engine.go();
@@ -127,14 +130,14 @@ public abstract class AbstractChart {
     }
 
     protected class EntryListener implements SCXMLListener {
-        Consumer<EnterableState> stateConsumer;
+        BiConsumer<EnterableState, Entity> stateConsumer;
 
-        protected EntryListener(Consumer<EnterableState> stateConsumer) {
+        protected EntryListener(BiConsumer<EnterableState, Entity> stateConsumer) {
             this.stateConsumer = stateConsumer;
         }
 
         public void onEntry(EnterableState entered) {
-            stateConsumer.accept(entered);
+            stateConsumer.accept(entered, entity);
         }
 
         public void onTransition(TransitionTarget from, TransitionTarget to, Transition transition, String event) {

@@ -1,6 +1,6 @@
 package info.nemoworks.chartd.bid.repository;
 
-import info.nemoworks.chartd.bid.domain.BidChart;
+import info.nemoworks.chartd.bid.chart.BidChart;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
