@@ -26,12 +26,16 @@ public abstract class AbstractChart<T extends Entity> {
 
     private T entity;
 
+    public T getEntity(){
+        return entity;
+    }
 
-    public AbstractChart(URL scxmlDocument, BiConsumer<EnterableState, Entity> stateConsumer, T entity) throws ModelException {
+
+    public AbstractChart(URL scxmlDocument, BiConsumer<EnterableState, T> stateConsumer, T entity) throws ModelException {
         this((URL) scxmlDocument, new JexlContext(), new JexlEvaluator(), stateConsumer, entity);
     }
 
-    public AbstractChart(URL scxmlDocument, Context rootCtx, Evaluator evaluator, BiConsumer<EnterableState, Entity> stateConsumer, T entity) throws ModelException {
+    public AbstractChart(URL scxmlDocument, Context rootCtx, Evaluator evaluator, BiConsumer<EnterableState,T> stateConsumer, T entity) throws ModelException {
         this.log = LogFactory.getLog(this.getClass());
 
         try {
@@ -48,7 +52,7 @@ public abstract class AbstractChart<T extends Entity> {
     }
 
 
-    private void initialize(SCXML stateMachine, Context rootCtx, Evaluator evaluator, BiConsumer<EnterableState, Entity> stateConsumer, T entity) throws ModelException {
+    private void initialize(SCXML stateMachine, Context rootCtx, Evaluator evaluator, BiConsumer<EnterableState, T> stateConsumer, T entity) throws ModelException {
         this.engine = new SCXMLExecutor(evaluator, new SimpleDispatcher(), new SimpleErrorReporter());
         this.engine.setStateMachine(stateMachine);
         this.engine.setRootContext(rootCtx);

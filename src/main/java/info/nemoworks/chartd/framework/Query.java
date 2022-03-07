@@ -3,17 +3,18 @@ package info.nemoworks.chartd.framework;
 import lombok.Getter;
 import lombok.NonNull;
 
-public class Task<T extends Entity> extends Message {
+public class Query<T extends Entity> extends Message {
 
     @NonNull
-    private String task;
+    @Getter
+    private String context;
 
     @Getter
     private T subject;
 
-    public Task(@NonNull T subject, @NonNull String task) {
+    public Query(@NonNull T subject, @NonNull String context) {
         super();
         this.subject = subject;
-        this.task = task;
+        this.context = context;
     }
 }

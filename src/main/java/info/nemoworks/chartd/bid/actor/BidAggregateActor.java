@@ -1,13 +1,11 @@
 package info.nemoworks.chartd.bid.actor;
 
-import info.nemoworks.chartd.bid.domain.BidChart;
-import info.nemoworks.chartd.bid.domain.Addon;
 import info.nemoworks.chartd.bid.domain.Bid;
-import info.nemoworks.chartd.bid.domain.Content;
-import info.nemoworks.chartd.bid.message.*;
-import info.nemoworks.chartd.bid.repository.BidRepository;
+import info.nemoworks.chartd.bid.domain.BidAggregate;
+import info.nemoworks.chartd.bid.domain.BidChart;
+import info.nemoworks.chartd.bid.message.command.*;
+import info.nemoworks.chartd.bid.message.query.BidQuery;
 import info.nemoworks.chartd.framework.Actor;
-import info.nemoworks.chartd.framework.Entity;
 import info.nemoworks.chartd.framework.Subscriber;
 import org.apache.commons.scxml2.model.EnterableState;
 import org.apache.commons.scxml2.model.ModelException;
@@ -17,72 +15,53 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 @Component
-public class BidAggregateActor extends Actor implements BidAggregate {
+public class BidAggregateActor extends Actor {
 
-
-    private BidRepository bidRepository;
+    private BidAggregate bidAggregate;
 
     @Autowired
-    public BidAggregateActor(BidRepository bidRepository) {
-        this.bidRepository = bidRepository;
-    }
-
-    public BidAggregateActor() {
-
+    public void setBidAggregate(BidAggregate bidAggregate) {
+        this.bidAggregate = bidAggregate;
     }
 
     @PostConstruct
-    public void register(){
-        this.getStub().register(new Subscriber<CreateCommand>(this::handleCreateCommand));
-        this.getStub().register(new Subscriber<ApproveCommand>(this::handleApproveCommand));
-        this.getStub().register(new Subscriber<CloseCommand>(this::handleCloseCommand));
-        this.getStub().register(new Subscriber<EditContentCommand>(this::handleEditContentCommand));
-        this.getStub().register(new Subscriber<AppendAddonCommand>(this::handleAppendAddonCommand));
+    public void register() {
+//        this.getStub().register(new Subscriber<CreateCommand>(bidAggregate::handleCreateCommand));
+//        this.getStub().register(new Subscriber<ApproveCommand>(bidAggregate::handleApproveCommand));
+//        this.getStub().register(new Subscriber<CloseCommand>(bidAggregate::handleCloseCommand));
+//        this.getStub().register(new Subscriber<EditContentCommand>(bidAggregate::handleEditContentCommand));
+//        this.getStub().register(new Subscriber<AppendAddonCommand>(bidAggregate::handleAppendAddonCommand));
     }
 
-    @Override
-    public void handleCreateCommand(CreateCommand command) {
-        Bid bid = new Bid();
-        bid.setTitle(command.getTitle());
-        bid.setCreator(command.getCreator());
-        bidRepository.saveBid(bid);
-    }
 
-    @Override
-    public void handleApproveCommand(ApproveCommand command) {
-        Bid bid = bidRepository.getBid(command.getTarget().getId());
-        bid.setApproved(true);
-        bidRepository.saveBid(bid);
-    }
+    public void pubQuery(EnterableState state, Bid bid) {
 
-    @Override
-    public void handleCloseCommand(CloseCommand command) {
-        Bid bid = bidRepository.getBid(command.getTarget().getId());
-        bid.setClosed(true);
-        bidRepository.saveBid(bid);
-    }
+        BidQuery bidQuery;
 
-    @Override
-    public void handleEditContentCommand(EditContentCommand command) {
-        Bid bid = bidRepository.getBid(command.getTarget().getId());
-        bid.setContent(new Content(command.getContent(), command.getEditor()));
-        bidRepository.saveBid(bid);
-    }
+        switch (state.getId()) {
+            case BidQuery.APPROVING:
+                bidQuery =  bidAggregate.queryOnApproving(bid);
+                break;
+            case BidQuery.CREATING:
+                bidQuery = bidAggregate.queryOnCreating(bid);
+                break;
+            case BidQuery.EDITING:
+                bidQuery = bidAggregate.queryOnEditing(bid);
+                break;
+            default:
+                bidQuery = null;
+        }
 
-    @Override
-    public void handleAppendAddonCommand(AppendAddonCommand command) {
-        Bid bid = bidRepository.getBid(command.getTarget().getId());
-        bid.getAddons().add(new Addon(command.getTarget().getId(), command.getAddon(), command.getAuthor()));
-        bidRepository.saveBid(bid);
-    }
+        if (null == bidQuery) return;
+        else{
+            getStub().pub(bidQuery);
+        }
 
-    public void pubState(EnterableState state, Entity bid) {
-        getStub().pub(BidTask.fromTaskName(state.getId(), (Bid) bid));
     }
 
     public void bootstrap() throws ModelException {
         Bid bid = new Bid();
-        BidChart bidChart = new BidChart(bid, this::pubState);
+        BidChart bidChart = new BidChart(bid, this::pubQuery);
     }
 
 }

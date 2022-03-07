@@ -12,7 +12,7 @@ public class BidChartRepository {
     private Map<String, BidChart> charts = new HashMap<>();
 
     public void save(BidChart bidChart) {
-        charts.put(bidChart.getBid().getId(), bidChart);
+        charts.put(bidChart.getEntity().getId(), bidChart);
     }
 
     public BidChart get(String bidId) {

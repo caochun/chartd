@@ -1,11 +1,10 @@
-package info.nemoworks.chartd.bid.message;
+package info.nemoworks.chartd.bid.message.command;
 
 import info.nemoworks.chartd.bid.domain.Bid;
-import info.nemoworks.chartd.framework.Command;
 import lombok.Getter;
 import lombok.NonNull;
 
-public class EditContentCommand extends Command<Bid> {
+public class EditContentCommand extends BidCommand {
 
     @Getter
     @NonNull

@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Data
 @RequiredArgsConstructor
-public class Message{
+public class Message {
 
     private final UUID id = UUID.randomUUID();
     private final Instant timestamp = Instant.now();

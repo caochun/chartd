@@ -3,6 +3,8 @@ package info.nemoworks.chartd;
 import com.google.common.eventbus.EventBus;
 import info.nemoworks.chartd.bid.actor.BidAggregateActor;
 import info.nemoworks.chartd.bid.actor.BidCreateActor;
+import info.nemoworks.chartd.bid.domain.BidAggregate;
+import info.nemoworks.chartd.bid.domain.BidAggregateImp;
 import info.nemoworks.chartd.bid.repository.BidRepository;
 import info.nemoworks.chartd.framework.Stub;
 import org.apache.commons.scxml2.model.ModelException;
@@ -48,6 +50,10 @@ public class ChartdTests {
             return new BidCreateActor();
         }
 
+        @Bean
+        public BidAggregate bidAggregate(){
+            return new BidAggregateImp();
+        }
 
     }
 
@@ -62,6 +68,9 @@ public class ChartdTests {
 
         assertNotNull(bidAggregateActor);
         assertNotNull(bidCreateActor);
+
+        bidAggregateActor.bootstrap();
+
 
     }
 }

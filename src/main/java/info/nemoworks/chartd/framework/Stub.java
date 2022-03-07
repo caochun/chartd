@@ -19,7 +19,7 @@ public class Stub {
         eventBus.post(message);
     }
 
-    public void register(Subscriber<?> subscriber){
+    public void register(Object subscriber){
         eventBus.register(subscriber);
     }
 
