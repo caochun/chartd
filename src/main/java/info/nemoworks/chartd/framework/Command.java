@@ -8,7 +8,9 @@ public abstract class Command<T extends Entity> extends Message {
     @Getter
     private T target;
 
-    public Command(@NonNull T target) {
+
+    public Command(@NonNull T target, @NonNull Object source) {
+        super(source);
         this.target = target;
     }
 }

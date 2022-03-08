@@ -9,12 +9,9 @@ public class Query<T extends Entity> extends Message {
     @Getter
     private String context;
 
-    @Getter
-    private T subject;
 
     public Query(@NonNull T subject, @NonNull String context) {
-        super();
-        this.subject = subject;
+        super(subject);
         this.context = context;
     }
 }

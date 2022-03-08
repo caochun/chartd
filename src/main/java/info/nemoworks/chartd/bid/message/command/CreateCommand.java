@@ -13,8 +13,8 @@ public class CreateCommand extends BidCommand {
     @Getter
     private String creator;
 
-    public CreateCommand(@NonNull Bid target, @NonNull String title, String creator) {
-        super(target);
+    public CreateCommand(@NonNull Bid target, @NonNull Object source, @NonNull String title, String creator) {
+        super(target, source);
         this.title = title;
         this.creator = creator;
     }

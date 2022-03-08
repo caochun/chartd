@@ -18,7 +18,7 @@ public class BidEditActor extends Actor {
     }
 
     public void handleEditing(EditingQuery query) {
-        this.queries.put(query.getSubject().getId(), query);
+        this.queries.put(query.getSource().toString(), query);
     }
 
 }

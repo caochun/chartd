@@ -1,16 +1,17 @@
 package info.nemoworks.chartd.framework;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.Getter;
+import org.springframework.context.ApplicationEvent;
 
-import java.time.Instant;
 import java.util.UUID;
 
-@Data
-@RequiredArgsConstructor
-public class Message {
+public class Message extends ApplicationEvent {
 
+    @Getter
     private final UUID id = UUID.randomUUID();
-    private final Instant timestamp = Instant.now();
+
+    public Message(Object source) {
+        super(source);
+    }
 
 }

@@ -19,6 +19,6 @@ public class BidApproveActor extends Actor {
 
     public void handleApproving(ApprovingQuery query) {
         LoggerFactory.getLogger(BidApproveActor.class).info("handling " + query.toString());
-        this.queries.put(query.getSubject().getId(), query);
+        this.queries.put(query.getSource().toString(), query);
     }
 }

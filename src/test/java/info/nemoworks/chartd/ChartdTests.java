@@ -1,10 +1,10 @@
 package info.nemoworks.chartd;
 
 import com.google.common.eventbus.EventBus;
-import info.nemoworks.chartd.bid.actor.BidAggregateActor;
+import info.nemoworks.chartd.bid.actor.BidActor;
 import info.nemoworks.chartd.bid.actor.BidCreateActor;
-import info.nemoworks.chartd.bid.domain.BidAggregate;
-import info.nemoworks.chartd.bid.domain.BidAggregateImp;
+import info.nemoworks.chartd.bid.domain.BidService;
+import info.nemoworks.chartd.bid.domain.BidServiceImp;
 import info.nemoworks.chartd.bid.repository.BidRepository;
 import info.nemoworks.chartd.framework.Stub;
 import org.apache.commons.scxml2.model.ModelException;
@@ -41,8 +41,8 @@ public class ChartdTests {
         }
 
         @Bean
-        public BidAggregateActor bidAggregateActor() {
-            return new BidAggregateActor();
+        public BidActor bidAggregateActor() {
+            return new BidActor();
         }
 
         @Bean
@@ -51,8 +51,8 @@ public class ChartdTests {
         }
 
         @Bean
-        public BidAggregate bidAggregate(){
-            return new BidAggregateImp();
+        public BidService bidService(){
+            return new BidServiceImp();
         }
 
     }
@@ -61,16 +61,15 @@ public class ChartdTests {
     private BidCreateActor bidCreateActor;
 
     @Autowired
-    private BidAggregateActor bidAggregateActor;
+    private BidService bidService;
 
     @Test
     public void testWhenBootstrap_CreateActorReceives() throws ModelException {
 
-        assertNotNull(bidAggregateActor);
+        assertNotNull(bidService);
         assertNotNull(bidCreateActor);
 
-        bidAggregateActor.bootstrap();
-
+        bidService.bootstrap();
 
     }
 }
