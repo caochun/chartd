@@ -4,8 +4,7 @@ import info.nemoworks.chartd.bid.domain.Bid;
 import lombok.NonNull;
 
 public class CreatingQuery extends BidQuery {
-
-    public CreatingQuery(@NonNull Bid target) {
-        super(target, "created");
+    public CreatingQuery(@NonNull Bid bid) {
+        super(bid);
     }
 }

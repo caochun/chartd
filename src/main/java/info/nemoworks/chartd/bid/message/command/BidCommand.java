@@ -5,7 +5,8 @@ import info.nemoworks.chartd.framework.Command;
 import lombok.NonNull;
 
 public class BidCommand extends Command<Bid> {
-    public BidCommand(@NonNull Bid target, @NonNull Object source) {
-        super(target,source);
+
+    public BidCommand(@NonNull Bid target) {
+        super(target);
     }
 }

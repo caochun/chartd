@@ -1,8 +1,9 @@
 package info.nemoworks.chartd.bid.actor;
 
+import info.nemoworks.chartd.bid.message.command.CreateCommand;
 import info.nemoworks.chartd.bid.message.query.CreatingQuery;
 import info.nemoworks.chartd.framework.Actor;
-import info.nemoworks.chartd.framework.Subscriber;
+import info.nemoworks.chartd.framework.Message;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
@@ -17,13 +18,24 @@ public class BidCreateActor extends Actor {
 
 
     @PostConstruct
-    public void register() {
-        this.getStub().register(new Subscriber<>(this::handleCreating));
+    public void registerQuerySubscriber() {
+        super.register(this::handleCreatingQueryMessage);
+    }
+
+    private void handleCreatingQueryMessage(Message<CreatingQuery> message) {
+        LoggerFactory.getLogger(BidCreateActor.class).info("handling bid " + message.getPayload().getSource().getId());
+        this.handleCreating(message.getPayload());
     }
 
     public void handleCreating(CreatingQuery query) {
-        LoggerFactory.getLogger(BidCreateActor.class).info("handling " + query.toString());
         this.queries.put(query.getSource().toString(), query);
+    }
+
+    public void pubCreateCommandMessage() {
+        queries.values().stream().forEach(creatingQuery -> {
+            this.pub(new Message<CreateCommand>(this, new CreateCommand(creatingQuery.getSource(), "abc", this.toString())));
+        });
+
     }
 
 

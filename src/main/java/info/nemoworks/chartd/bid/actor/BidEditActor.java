@@ -2,9 +2,10 @@ package info.nemoworks.chartd.bid.actor;
 
 import info.nemoworks.chartd.bid.message.query.EditingQuery;
 import info.nemoworks.chartd.framework.Actor;
-import info.nemoworks.chartd.framework.Subscriber;
+import info.nemoworks.chartd.framework.Message;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,12 +14,13 @@ public class BidEditActor extends Actor {
 
     private Map<String, EditingQuery> queries = new HashMap<>();
 
-    public BidEditActor() {
-        this.getStub().register(new Subscriber<EditingQuery>(this::handleEditing));
+    @PostConstruct
+    public void registerEditQueryMessageSubscriber(){
+        this.register(this::handleEditingMessage);
     }
 
-    public void handleEditing(EditingQuery query) {
-        this.queries.put(query.getSource().toString(), query);
+    public void handleEditingMessage(Message<EditingQuery> message) {
+        this.queries.put(message.getPayload().getSource().getId(), message.getPayload());
     }
 
 }

@@ -6,8 +6,8 @@ import lombok.NonNull;
 
 public class BidQuery extends Query<Bid> {
 
-    public BidQuery(@NonNull Bid target, @NonNull String context) {
-        super(target, context);
+    public BidQuery(@NonNull Bid bid) {
+        super(bid);
     }
 
     public static final String APPROVING = "approve";

@@ -2,11 +2,13 @@ package info.nemoworks.chartd;
 
 import com.google.common.eventbus.EventBus;
 import info.nemoworks.chartd.bid.actor.BidActor;
+import info.nemoworks.chartd.bid.actor.BidApproveActor;
 import info.nemoworks.chartd.bid.actor.BidCreateActor;
+import info.nemoworks.chartd.bid.actor.BidEditActor;
 import info.nemoworks.chartd.bid.domain.BidService;
 import info.nemoworks.chartd.bid.domain.BidServiceImp;
 import info.nemoworks.chartd.bid.repository.BidRepository;
-import info.nemoworks.chartd.framework.Stub;
+import info.nemoworks.chartd.framework.MessageStub;
 import org.apache.commons.scxml2.model.ModelException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,8 +33,8 @@ public class ChartdTests {
         }
 
         @Bean
-        public Stub stub() {
-            return new Stub();
+        public MessageStub stub() {
+            return new MessageStub();
         }
 
         @Bean
@@ -51,8 +53,18 @@ public class ChartdTests {
         }
 
         @Bean
-        public BidService bidService(){
+        public BidService bidService() {
             return new BidServiceImp();
+        }
+
+        @Bean
+        public BidApproveActor bidApproveActor() {
+            return new BidApproveActor();
+        }
+
+        @Bean
+        public BidEditActor bidEditActor() {
+            return new BidEditActor();
         }
 
     }
@@ -70,6 +82,8 @@ public class ChartdTests {
         assertNotNull(bidCreateActor);
 
         bidService.bootstrap();
+
+        bidCreateActor.pubCreateCommandMessage();
 
     }
 }

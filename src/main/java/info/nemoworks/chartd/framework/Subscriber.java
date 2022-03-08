@@ -12,7 +12,6 @@ public class Subscriber<T extends Message> implements ApplicationListener<T> {
         this.consumer = consumer;
     }
 
-
     @Override
     public void onApplicationEvent(T event) {
         this.consumer.accept(event);

@@ -1,9 +1,10 @@
 package info.nemoworks.chartd.bid.actor;
 
 import info.nemoworks.chartd.bid.domain.BidService;
+import info.nemoworks.chartd.bid.message.command.CreateCommand;
 import info.nemoworks.chartd.bid.message.query.BidQuery;
 import info.nemoworks.chartd.framework.Actor;
-import info.nemoworks.chartd.framework.Subscriber;
+import info.nemoworks.chartd.framework.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,18 +21,18 @@ public class BidActor extends Actor {
     }
 
     @PostConstruct
-    public void register() {
-        getStub().register(new Subscriber<>(bidService::handleCreateCommand));
+    public void registerCommandSubscribers() {
+        super.<Message<CreateCommand>>register(this::handleCreateCommandMessage);
     }
 
+    private void handleCreateCommandMessage(Message<CreateCommand> message) {
+        this.bidService.handleCreateCommand(message.getPayload());
+    }
 
-    public void pubQuery(BidQuery bidQuery) {
+    public void pubQueryMessage(BidQuery bidQuery) {
         if (null == bidQuery) return;
-        else{
-            getStub().pub(bidQuery);
+        else {
+            pub(new Message<>(this, bidQuery));
         }
     }
-
-
-
 }

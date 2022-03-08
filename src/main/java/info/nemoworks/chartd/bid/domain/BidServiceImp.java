@@ -1,13 +1,15 @@
 package info.nemoworks.chartd.bid.domain;
 
 import info.nemoworks.chartd.bid.actor.BidActor;
-import info.nemoworks.chartd.bid.message.command.*;
+import info.nemoworks.chartd.bid.message.command.ApproveCommand;
+import info.nemoworks.chartd.bid.message.command.CreateCommand;
 import info.nemoworks.chartd.bid.message.query.ApprovingQuery;
 import info.nemoworks.chartd.bid.message.query.CreatingQuery;
 import info.nemoworks.chartd.bid.message.query.EditingQuery;
 import info.nemoworks.chartd.bid.repository.BidRepository;
 import org.apache.commons.scxml2.model.EnterableState;
 import org.apache.commons.scxml2.model.ModelException;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +33,9 @@ public class BidServiceImp implements BidService {
 
     @Override
     public void handleCreateCommand(CreateCommand command) {
-        Bid bid = new Bid();
+
+        LoggerFactory.getLogger(BidServiceImp.class).info("handling create command :" + command.getTitle());
+        Bid bid = command.getTarget();
         bid.setTitle(command.getTitle());
         bid.setCreator(command.getCreator());
         bidRepository.saveBid(bid);
@@ -81,7 +85,6 @@ public class BidServiceImp implements BidService {
     }
 
 
-
     @Override
     public void bootstrap() {
         Bid bid = new Bid();
@@ -92,13 +95,13 @@ public class BidServiceImp implements BidService {
         }
     }
 
-    public void pubQuery(EnterableState state, Bid bid){
-        switch (state.getId()){
+    public void pubQuery(EnterableState state, Bid bid) {
+        switch (state.getId()) {
             case "created":
-                bidActor.pubQuery(new CreatingQuery(bid));
+                bidActor.pubQueryMessage(new CreatingQuery(bid));
                 break;
             case "editing":
-                bidActor.pubQuery(new EditingQuery(bid));
+                bidActor.pubQueryMessage(new EditingQuery(bid));
                 break;
             default:
                 return;

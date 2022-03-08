@@ -4,6 +4,7 @@ import info.nemoworks.chartd.bid.message.command.*;
 import info.nemoworks.chartd.bid.message.query.ApprovingQuery;
 import info.nemoworks.chartd.bid.message.query.CreatingQuery;
 import info.nemoworks.chartd.bid.message.query.EditingQuery;
+import info.nemoworks.chartd.framework.Message;
 
 
 public interface BidService {
