@@ -1,16 +1,13 @@
 package info.nemoworks.chartd.framework;
 
-import com.google.common.eventbus.EventBus;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Stub {
+public class MessageStub {
 
 
     private ApplicationEventPublisher applicationEventPublisher;
@@ -27,8 +24,8 @@ public class Stub {
         this.applicationContext = applicationContext;
     }
 
-    public void pub(ApplicationEvent event){
-        applicationEventPublisher.publishEvent(event);
+    public void pub(Message<?> message){
+        applicationEventPublisher.publishEvent(message);
     }
 
     public void register(Subscriber subscriber){
