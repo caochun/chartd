@@ -1,0 +1,22 @@
+@startuml
+class Bid{
+    String creator
+    String title
+    boolean approved
+    boolean closed
+}
+
+class Content {
+    String content
+    String editor
+}
+
+class Addon{
+    String addon
+    String tracker
+}
+Bid "1" *-down- "1" Content
+Bid "1" *- "n" Addon
+
+
+@enduml
