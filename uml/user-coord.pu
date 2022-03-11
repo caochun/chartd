@@ -1,0 +1,16 @@
+@startuml
+actor       User        as user
+control     BidLogic       as logic
+participant BidService     as service
+entity      Bid         as bid
+
+user -> logic : 获取应用状态
+logic -> user : 应用状态
+
+user -> service : 根据应用状态决定服务调用
+service -> bid : 领域层逻辑执行
+bid -> service : 返回结果
+service -> user : 返回结果
+user -> logic : 调整应用状态
+
+@enduml

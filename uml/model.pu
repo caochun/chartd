@@ -16,7 +16,7 @@ class Addon{
     String tracker
 }
 Bid "1" *-down- "1" Content
-Bid "1" *- "n" Addon
+Bid "1" *-right- "n" Addon
 
 
 @enduml

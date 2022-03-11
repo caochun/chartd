@@ -28,7 +28,7 @@ public class BidCreateActor extends Actor {
     }
 
     public void handleCreating(CreatingQuery query) {
-        this.queries.put(query.getSource().toString(), query);
+        this.queries.put(query.getSource().getId(), query);
     }
 
     public void pubCreateCommandMessage() {

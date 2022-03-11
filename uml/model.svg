@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="254px" preserveAspectRatio="none" style="width:250px;height:254px;background:#FFFFFF;" version="1.1" viewBox="0 0 250 254" width="250px" zoomAndPan="magnify"><defs><filter height="300%" id="f1wyyvcstg4pnr" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[ecbc73e2c4b6370b2ac356834b2f2e94]
+class Bid--><rect codeLine="1" fill="#FEFECE" filter="url(#f1wyyvcstg4pnr)" height="99.8203" id="Bid" style="stroke:#A80036;stroke-width:1.5;" width="109" x="7" y="7"/><ellipse cx="48.55" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M51.0231,29.1431 Q50.4421,29.4419 49.8029,29.5913 Q49.1638,29.7407 48.4582,29.7407 Q45.9514,29.7407 44.6315,28.0889 Q43.3117,26.437 43.3117,23.3159 Q43.3117,20.1865 44.6315,18.5347 Q45.9514,16.8828 48.4582,16.8828 Q49.1638,16.8828 49.8112,17.0322 Q50.4587,17.1816 51.0231,17.4805 L51.0231,20.2031 Q50.3923,19.6221 49.7988,19.3523 Q49.2053,19.0825 48.5744,19.0825 Q47.2297,19.0825 46.5449,20.1492 Q45.8601,21.2158 45.8601,23.3159 Q45.8601,25.4077 46.5449,26.4744 Q47.2297,27.541 48.5744,27.541 Q49.2053,27.541 49.7988,27.2712 Q50.3923,27.0015 51.0231,26.4204 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="18" x="68.45" y="27.5352">Bid</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="115" y1="39" y2="39"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="74" x="13" y="53.6348">String creator</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="55" x="13" y="66.5898">String title</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="97" x="13" y="79.5449">boolean approved</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="81" x="13" y="92.5">boolean closed</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="115" y1="98.8203" y2="98.8203"/><!--MD5=[fd7366e9f96236d9aa60dcc04f2b83e5]
+class Content--><rect codeLine="8" fill="#FEFECE" filter="url(#f1wyyvcstg4pnr)" height="73.9102" id="Content" style="stroke:#A80036;stroke-width:1.5;" width="88" x="17.5" y="167"/><ellipse cx="37.9" cy="183" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M40.3731,189.1431 Q39.7921,189.4419 39.1529,189.5913 Q38.5138,189.7407 37.8082,189.7407 Q35.3014,189.7407 33.9815,188.0889 Q32.6617,186.437 32.6617,183.3159 Q32.6617,180.1865 33.9815,178.5347 Q35.3014,176.8828 37.8082,176.8828 Q38.5138,176.8828 39.1612,177.0322 Q39.8087,177.1816 40.3731,177.4805 L40.3731,180.2031 Q39.7423,179.6221 39.1488,179.3523 Q38.5553,179.0825 37.9244,179.0825 Q36.5797,179.0825 35.8949,180.1492 Q35.2101,181.2158 35.2101,183.3159 Q35.2101,185.4077 35.8949,186.4744 Q36.5797,187.541 37.9244,187.541 Q38.5553,187.541 39.1488,187.2712 Q39.7423,187.0015 40.3731,186.4204 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="44" x="53.1" y="187.5352">Content</text><line style="stroke:#A80036;stroke-width:1.5;" x1="18.5" x2="104.5" y1="199" y2="199"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="76" x="23.5" y="213.6348">String content</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="67" x="23.5" y="226.5898">String editor</text><line style="stroke:#A80036;stroke-width:1.5;" x1="18.5" x2="104.5" y1="232.9102" y2="232.9102"/><!--MD5=[beb39459eb2a9d0a8d7494f5034c170f]
+class Addon--><rect codeLine="13" fill="#FEFECE" filter="url(#f1wyyvcstg4pnr)" height="73.9102" id="Addon" style="stroke:#A80036;stroke-width:1.5;" width="85" x="151" y="20"/><ellipse cx="172.75" cy="36" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M175.2231,42.1431 Q174.6421,42.4419 174.0029,42.5913 Q173.3638,42.7407 172.6582,42.7407 Q170.1514,42.7407 168.8315,41.0889 Q167.5117,39.437 167.5117,36.3159 Q167.5117,33.1865 168.8315,31.5347 Q170.1514,29.8828 172.6582,29.8828 Q173.3638,29.8828 174.0112,30.0322 Q174.6587,30.1816 175.2231,30.4805 L175.2231,33.2031 Q174.5923,32.6221 173.9988,32.3523 Q173.4053,32.0825 172.7744,32.0825 Q171.4297,32.0825 170.7449,33.1492 Q170.0601,34.2158 170.0601,36.3159 Q170.0601,38.4077 170.7449,39.4744 Q171.4297,40.541 172.7744,40.541 Q173.4053,40.541 173.9988,40.2712 Q174.5923,40.0015 175.2231,39.4204 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="38" x="188.25" y="40.5352">Addon</text><line style="stroke:#A80036;stroke-width:1.5;" x1="152" x2="235" y1="52" y2="52"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="69" x="157" y="66.6348">String addon</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="157" y="79.5898">String tracker</text><line style="stroke:#A80036;stroke-width:1.5;" x1="152" x2="235" y1="85.9102" y2="85.9102"/><!--MD5=[0487289ca0a9ed0d84bcedf4922d8272]
+reverse link Bid to Content--><path codeLine="17" d="M61.5,120.22 C61.5,136.12 61.5,152.69 61.5,166.8 " fill="none" id="Bid-backto-Content" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="61.5,107.09,57.5,113.09,61.5,119.09,65.5,113.09,61.5,107.09" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="52.9625" y="127.43">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="52.7625" y="156.1637">1</text><!--MD5=[3de85acb1e65536fb8bdf378b1f29343]
+reverse link Bid to Addon--><path codeLine="18" d="M129.19,57 C136.42,57 143.66,57 150.9,57 " fill="none" id="Bid-backto-Addon" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="116.16,57,122.16,61,128.16,57,122.16,53,116.16,57" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="124.0424" y="53.5935">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="134.8906" y="53.3137">n</text><!--MD5=[ec8d6d377a2564227858ee8294c84a79]
+@startuml
+class Bid{
+    String creator
+    String title
+    boolean approved
+    boolean closed
+}
+
+class Content {
+    String content
+    String editor
+}
+
+class Addon{
+    String addon
+    String tracker
+}
+Bid "1" *-down- "1" Content
+Bid "1" *-right- "n" Addon
+
+
+@enduml
+
+PlantUML version 1.2022.1(Wed Feb 02 02:19:58 CST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: zh
+Country: CN
+--></g></svg>

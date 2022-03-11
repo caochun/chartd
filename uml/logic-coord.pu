@@ -1,0 +1,16 @@
+@startuml
+control     BidLogic       as logic
+participant BidService     as service
+entity      Bid         as bid
+
+logic -> service : editBid
+service -> bid : setContent
+logic -> service : approveBid
+service -> bid : setApprove
+logic -> service : trackBid
+service -> bid : addAddon
+logic -> service : trackBid
+service -> bid : addAddon
+logic -> service : closeBid
+service -> bid : setClose
+@enduml
