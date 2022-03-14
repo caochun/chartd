@@ -44,6 +44,9 @@
 
 总体而言，现有的BPMN等流程模型所描述的应用逻辑执行过程中存在大量隐式假设，特别是在涉及人这样的主动实体的场景支持较差。这其中的根本原因在于，我们在应用系统的领域模型中单纯建立信息空间相关实体的模型，而缺乏针对物理空间和人的建模。
 
+## 面向Actor的业务架构
+
+上述业务过程
 
 [1] Evans, E. (2004). Domain-Driven Design: Tackling Complexity in the Heart of Software. Addison-Wesley. 
 
