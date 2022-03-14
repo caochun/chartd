@@ -1,4 +1,11 @@
 @startuml
+state created : 新建"投标"对象
+state editing : 内容编辑
+state reviewing : 公司领导审核
+state tracking : 投标状态追踪
+state closed : 结束
+
+
 [*] -right-> created
 
 created -right-> editing : start
