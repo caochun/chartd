@@ -1,0 +1,25 @@
+@startuml
+
+
+actor Salesman as salesman
+actor Manager as manager
+actor Tracker as tracker
+actor BidLogic as bidLogic
+participant BidService     as service
+
+bidLogic -> bidLogic ++ #lightblue: start
+bidLogic -> salesman ++ #lightgreen: 消息（Bid已创建）
+salesman -> bidLogic --: 消息（Bid内容）
+bidLogic --> service ++ #grey: 调用setContent()
+service --> bidLogic --: 返回结果
+bidLogic -> manager ++ #lightgreen: 消息（Bid待审批）
+manager -> bidLogic --: 消息（审批通过）
+bidLogic --> service ++ #grey: 调用setApprove()
+service --> bidLogic --: 返回结果
+bidLogic -> tracker ++ #lightgreen: 消息（Bid待追踪）
+tracker -> bidLogic --: 消息（追踪情况）
+bidLogic --> service ++ #grey: 调用addAddon()
+service --> bidLogic --: 返回结果
+
+
+@enduml

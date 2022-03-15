@@ -1,0 +1,14 @@
+@startuml
+actor BidService
+actor Salesman
+actor Manager
+actor Tracker
+actor BidLogic
+
+BidLogic <-up(0)-> Manager
+BidLogic <-do(0)-> Tracker
+BidLogic <-le(0)-> Salesman
+BidLogic <-ri(0)-> BidService
+
+
+@enduml
