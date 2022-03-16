@@ -64,7 +64,7 @@ BPMN模型本身并没有给出规范如何让用户参与这些任务，不同�
 
 
 
-[1] Evans, E. (2004). Domain-Driven Design: Tackling Complexity in the Heart of Software. Addison-Wesley.
-[2] Hewitt, Carl; Bishop, Peter; Steiger, Richard (1973). "A Universal Modular Actor Formalism for Artificial Intelligence". IJCAI.
-[3] How the Actor Model Meets the Needs of Modern, Distributed Systems. https://doc.akka.io/docs/akka/current/typed/guide/actors-intro.html
-[4] Robert C. Martin. 2017. Clean Architecture: A Craftsman's Guide to Software Structure and Design (1st. ed.). Prentice Hall Press, USA.
+- [1] Evans, E. (2004). Domain-Driven Design: Tackling Complexity in the Heart of Software. Addison-Wesley.
+- [2] Hewitt, Carl; Bishop, Peter; Steiger, Richard (1973). "A Universal Modular Actor Formalism for Artificial Intelligence". IJCAI.
+- [3] How the Actor Model Meets the Needs of Modern, Distributed Systems. https://doc.akka.io/docs/akka/current/typed/guide/actors-intro.html
+- [4] Robert C. Martin. 2017. Clean Architecture: A Craftsman's Guide to Software Structure and Design (1st. ed.). Prentice Hall Press, USA.
