@@ -2,8 +2,6 @@
 
 ## 问题
 
-[//]: # (针对用户需求，应用软件要完成若干用户任务，这些任务的实现一般成为应用逻辑或业务逻辑。这些业务逻辑协调用以表达领域概念的对象来解决问题[1]。)
-
 
 某商业公司提出"投标过程管理"需求：当公司业务代表通过招标信息发现商机之后，需要向公司汇报该商机，经公司领导审批通过后，执行投标过程，
 并在后续过程中不断跟踪投标过程，直到成功或失败。 这个业务逻辑（或业务过程）可以用一个流程图或者一个状态转移图来建模，如下所示。
@@ -47,8 +45,17 @@ BPMN模型本身并没有给出规范如何让用户参与这些任务，不同�
 
 ## 面向Actor的业务架构
 
-如上所述，采用BPMN这类模型较为适合建模并执行可自动化（例如仅包含服务调用等）的业务逻辑，但并不能有效支持需有用户参与的业务逻辑执行。当刻画业务逻辑的
-模型退化为一个活动划分或者状态记录模型时，我们需要在每个活动或状态中定义必需的协同语义（参与者、交互协议等），并进行适合的软件抽象与架构设计支持协同过程的实施。
+如上所述，采用BPMN这类模型较为适合建模并执行可自动化（例如仅包含服务调用等）的业务逻辑，但面向涉及用户参与的业务时往往退化为一个活动划分或者状态记录模型时。
+因此我们需要有更合适的软件抽象与架构来表达并实现业务逻辑运行中的业务实体协同（包括参与者及他们间的交互协议等）。
+
+因业务逻辑本质上就是在某个应用领域中协同领域概念（领域模型与领域服务）以实现业务目标[1]，因此我们可以将所设计的领域概念及业务逻辑都建模为`Actor`[2]，
+业务逻辑依靠Actor间发送并处理消息来推动执行。具体Actor模式概念与实现框架可以参考Akka[3]。前述投标管理逻辑可以Actor建模如下图所示。
+
+![](uml/actor.svg)
+
+投标管理业务`BidLogic`
+
+
 
 ![](uml/actor2.svg)
 
@@ -58,5 +65,6 @@ BPMN模型本身并没有给出规范如何让用户参与这些任务，不同�
 [//]: # (- 一个活动/状态下的参与者怎么协同没有明确定义。每个状态下的参与方之间的交互协议（输入什么输出什么）并不在应用逻辑中表达，如果涉及多个参与者他们间的关系缺乏明确表达和具体实施方法，例如"多数表决"如何表达并实施。)
 
 
-[1] Evans, E. (2004). Domain-Driven Design: Tackling Complexity in the Heart of Software. Addison-Wesley. 
-
+[1] Evans, E. (2004). Domain-Driven Design: Tackling Complexity in the Heart of Software. Addison-Wesley.
+[2] Hewitt, Carl; Bishop, Peter; Steiger, Richard (1973). "A Universal Modular Actor Formalism for Artificial Intelligence". IJCAI.
+[3] How the Actor Model Meets the Needs of Modern, Distributed Systems. https://doc.akka.io/docs/akka/current/typed/guide/actors-intro.html
