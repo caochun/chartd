@@ -53,18 +53,18 @@ BPMN模型本身并没有给出规范如何让用户参与这些任务，不同�
 
 ![](uml/actor.svg)
 
-投标管理业务`BidLogic`
-
-
+投标管理业务`BidLogic`作为一个业务执行者的隐喻（metaphor）负责管理业务执行状态，在特定的业务状态下与各个业务参与方进行交互促成其间协同。例如`Bid`创建伊始，要求Salesman填写`Bid`内容，然后将填好内容的`Bid`对象呈现给Manager进行审批，等。当然对于本身就是信息空间的`BidService`，`BidLogic`可以直接调用其服务，因此上述协同过程实际如下：
 
 ![](uml/actor2.svg)
 
 
-[//]: # (- 一个活动/状态下需要谁参与没有明确定义。应用逻辑执行的每个状态下需要执行的任务需要明确规约主客体；)
+上图中，`BidLogic`与`Salesman`/`Manager`/`Tracker`均为可以接受和发送消息的Actor，`BidService`为普通服务。`BidLogic`需协同另外三个Actor时，对其发出消息，消息内包含协同所需要上下文信息（例如`Bid`对象状态），Actor收到消息后进行相应处理并返回协同结果。这其中隐含的一个问题是，如何定义协议，即`BidLogic`如何告诉其他Actor当前需要做什么，Actor处理完消息后返回的结果`BidLogic`如何理解，更简单来说就是参与协同者分别期待输入什么输出什么。
 
-[//]: # (- 一个活动/状态下的参与者怎么协同没有明确定义。每个状态下的参与方之间的交互协议（输入什么输出什么）并不在应用逻辑中表达，如果涉及多个参与者他们间的关系缺乏明确表达和具体实施方法，例如"多数表决"如何表达并实施。)
+我们可以采用现有的设计模式来表达协同语义（输入输出），例如采用Clean Architecture[4]中的Boundary模式，将Request/Response对定义为一个实体的协同接口。针对对于信息空间领域模型的管理业务，我们采用CQRS模式来进行协议定义。
+
 
 
 [1] Evans, E. (2004). Domain-Driven Design: Tackling Complexity in the Heart of Software. Addison-Wesley.
 [2] Hewitt, Carl; Bishop, Peter; Steiger, Richard (1973). "A Universal Modular Actor Formalism for Artificial Intelligence". IJCAI.
 [3] How the Actor Model Meets the Needs of Modern, Distributed Systems. https://doc.akka.io/docs/akka/current/typed/guide/actors-intro.html
+[4] Robert C. Martin. 2017. Clean Architecture: A Craftsman's Guide to Software Structure and Design (1st. ed.). Prentice Hall Press, USA.
