@@ -88,12 +88,23 @@ BPMN模型本身并没有给出规范如何让用户参与这些任务，不同�
 
 面向Actor的协同模式使得我们可以进一步实现关注分离，特别是采用BPMN流程引擎难以实现的"中国式流程"。因为`BidLogic`并不直接控制协同的实施，
 只是通过消息通知协同参与者，所以具体一个协同任务怎么完成从协同逻辑中可以分离出去，例如：
-- 催办，当某个协同实体超时未返回消息，协同逻辑可以重新发送消息进行催办；
-- 代办，协同实体进行消息转发即可实现代办过程；
-- 会签，协同实体对应的Actor负责解释并实施会签要求
-- 撤回，某个活动需要撤回时，只需要发送撤回消息给协同实体，协同实体根据自己的消息状态实现撤回服务
+- 催办，协同逻辑可针对活动设置定时器，当某个协同实体超时未返回消息，协同逻辑可以重新发送消息进行催办；
+- 代办，某个Actor所代表的用户发出代办请求后，Actor把协同消息转发所指定代办用户对应的Actor即可；
+- 会签，协同实体对应的Actor负责解释并实施会签要求，例如要求至少三人时，Actor可以让三个用户进行业务操作后再发出回应消息；
+- 撤回，某个活动需要撤回时，只需要发送撤回消息给协同实体，协同实体根据自己的消息状态实现撤回服务。
+
+### 业务/协同逻辑实现
+
+面向Actor考虑应用架构时，类似`BidLogic`这一的业务/协同逻辑的核心是协同状态管理和每个状态下协同消息（Query和Command）的发送与接收，
+因此状态机模型是一种可选的实现方式，当然也可采用BPMN建模，以ManualTask描述涉及其他Actor的协同活动，用ServiceTask或其他活动类型实现原有BPMN执行语义。
+此外，也完全可以采用业务决策表[7]来实现，或将前述三者（状态机模型、流程模型和决策表）混合使用进行复杂业务建模。
+
+## 代码解释
+
+略。
 
 
+## 参考文献
 
 - [1] Evans, E. (2004). Domain-Driven Design: Tackling Complexity in the Heart of Software. Addison-Wesley.
 - [2] Hewitt, Carl; Bishop, Peter; Steiger, Richard (1973). "A Universal Modular Actor Formalism for Artificial Intelligence". IJCAI.
@@ -101,3 +112,4 @@ BPMN模型本身并没有给出规范如何让用户参与这些任务，不同�
 - [4] Robert C. Martin. 2017. Clean Architecture: A Craftsman's Guide to Software Structure and Design (1st. ed.). Prentice Hall Press, USA.
 - [5] Martin Fowler. Command Query Separation. https://martinfowler.com/bliki/CommandQuerySeparation.html
 - [6] Martin Fowler. Event Souring. https://martinfowler.com/eaaDev/EventSourcing.html
+- [7] Decision Table. https://en.wikipedia.org/wiki/Decision_table
