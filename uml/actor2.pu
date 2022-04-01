@@ -6,9 +6,10 @@ actor Manager as manager
 actor Tracker as tracker
 actor BidLogic as bidLogic
 participant BidService     as service
-
-bidLogic -> bidLogic ++ #lightblue: start
-bidLogic -> salesman ++ #lightgreen: 消息（Bid已创建）
+bidLogic --> bidLogic ++ #lightblue: start
+bidLogic --> service ++#grey: newBid()
+service --> bidLogic --: 返回结果
+bidLogic --> salesman ++ #lightgreen: 消息（Bid已创建）
 salesman -> bidLogic --: 消息（Bid内容）
 bidLogic --> service ++ #grey: 调用setContent()
 service --> bidLogic --: 返回结果
